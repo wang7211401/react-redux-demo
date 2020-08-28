@@ -2,12 +2,19 @@ import React from "react"
 import ReactDOM from "react-dom"
 import App from "./App"
 
-import { createStore } from "redux"
+import { createStore, applyMiddleware } from "redux"
 // import reducer from "./reducers/counter"
 import { Provider } from "react-redux"
 import rootReducer from "./reducers/index"
+import logger from "redux-logger"
+import thunk from "redux-thunk"
+import { composeWithDevTools } from "redux-devtools-extension"
 
-const store = createStore(rootReducer)
+const store = createStore(
+  rootReducer,
+  {},
+  composeWithDevTools(applyMiddleware(logger, thunk))
+)
 
 // const render = () => {
 //   ReactDOM.render(
